@@ -1,0 +1,37 @@
+1.)Debug = False when in production
+2.) Allowed Hosts =["http://localhost:3000"]
+3.) installed apps ='appname',
+		'rest_framework',
+4.) Install rest framework - pip install djangorestframework
+
+5.) Databases configuration
+	pass- asimthaha123
+	username- asimthaha
+
+mongodb+srv://asimthaha:<password>@cluster0.nnbhz73.mongodb.net/?retryWrites=true&w=majority
+mongodb+srv://asimthaha:asimthaha123@cluster0.nnbhz73.mongodb.net/?retryWrites=true&w=majority
+
+DATABASES = {
+'default': {
+'ENGINE': 'djongo',
+"CLIENT": {
+"name": "studentsdb",
+"host": "mongodb+srv://asimthaha:asimthaha123@cluster0.nnbhz73.mongodb.net/?retryWrites=true&w=majority",
+"username": "asimthaha",
+"password": "asimthaha123",
+"authMechanism": "SCRAM-SHA-1",
+},
+ }
+}
+
+For an APi two things are there
+Request and response 
+
+def viewAll(request):
+	if request.method=="GET":
+		return "hello"
+
+
+
+patient-app (patients- add view search delete)(name,address,phone,email,pincode) view with dummy data
+movie-app(name,image,actor,actress,director,producer)
