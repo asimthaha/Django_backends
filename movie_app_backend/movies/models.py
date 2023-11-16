@@ -9,6 +9,4 @@ class MovieAdd(models.Model):
     actress = models.CharField(max_length=100)
     director = models.CharField(max_length=100)
     producer = models.CharField(max_length=100)
-    camera = models.CharField(max_length=100)
-    distributor = models.CharField(max_length=100)
 

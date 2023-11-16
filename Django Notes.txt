@@ -1,3 +1,5 @@
+pip install pymongo==3.12.3
+
 1.)Debug = False when in production
 2.) Allowed Hosts =["http://localhost:3000"]
 3.) installed apps ='appname',
@@ -33,5 +35,69 @@ def viewAll(request):
 
 
 
-patient-app (patients- add view search delete)(name,address,phone,email,pincode) view with dummy data
-movie-app(name,image,actor,actress,director,producer)
+Django Rest Serializer*********(serializer.py)
+-------------------------------
+converting  text data into equivalent model data
+
+from rest_framework import serializers
+from students.models import StudentModel
+
+class StudentSerilizer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentModel
+        fields = (
+            'name','admno','rollno','college'
+        )
+
+
+#make change in views.py
+from django.http import HttpResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def addStudentView(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        print(data)
+        return HttpResponse(json.dumps({"status":"Student adding section"}))
+
+@csrf_exempt
+def addView(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        print(data)
+        recipe_serializer = RecipeSerializer(data=data)
+        if recipe_serializer.is_valid():
+            recipe_serializer.save()
+            return HttpResponse(json.dumps({"status":"New Recipe Data"}))
+        else:
+            return HttpResponse(json.dumps({"status":"Recipe Data Not Added"}))
+
+
+Django dispaly data in view as json**********
+--------------------------------------------
+
+@csrf_exempt
+def displayView(request):
+    if request.method=="POST":
+        studentList = StudentModel.objects.all()
+        serialise_data=StudentSerializer(studentList,many=True)
+        return HttpResponse(json.dumps(serialise_data.data))
+
+
+Django cors*****(only for lcal environment and not in cloud env )
+-----------------
+in http pages cors needed
+in https pages not needed
+
+pip install django-cors-headers
+
+ALLOWED_HOSTS = ['*']
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
+
+in installed apps
+'corsheaders',
+
+in middleware add
+'corsheaders.middleware.CorsMiddleware',
